@@ -13,14 +13,12 @@ class Main {
         for(String i : strList){
             int convertedNTime = n * 1000;
             int b = -1;
-            while(b < strList.size()){
                 long currentTime = System.currentTimeMillis();
                 long timePassed = currentTime - startTime;
                 if(timePassed >= convertedNTime){
                     b += 1;
                     System.out.println(strList.get(b));
                     System.out.println("I waited " + timePassed + " ms!");
-                }
             }
         }
     }
