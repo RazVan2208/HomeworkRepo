@@ -8,23 +8,22 @@
  //   RightAngledTriange and Parallelogram that implement the interface of Shape
 // 	- Note: The constructor for each of these classes should take in the minimum number of parameters to be able to specify a shape of that class of any size.
 public class Circle implements Shape{
-    private double mlength = 0;
-    private double mwidth = 0;
-    public Square(double length, double width){
-        mlength = length;
-        mwidth = width;
+  double pi = Math.PI;
+  private double mradius = 0;
+  public Circle(double radius){
+      mradius = radius;
+  }
+  @Override
+  public double getArea() {
+      return pi * mradius * mradius;
     }
-    @Override
-    public double getArea() {
-        return mlength * mwidth;
-      }
-    public double getPerimeter() {
-        return 2*mlength + 2*mwidth;
-      }
-    public int getNumOfEdges() {
-        return 4;
-      }
-    public int getNumOfCorners() {
-        return 4;
-      }
+  public double getPerimeter() {
+      return 2 * pi * mradius;
+    }
+  public int getNumOfEdges() {
+      return 0;
+    }
+  public int getNumOfCorners() {
+      return 0;
+    }
 }
