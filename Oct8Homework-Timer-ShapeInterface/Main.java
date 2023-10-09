@@ -10,11 +10,11 @@ public class Main {
     shapes.add(new Parallelogram(3, 2, 1));
     shapes.add(new RightAngleTriange(3, 4, 5));
     shapes.add(new EquilateralTriangle(2, 2));
-    for(Shape shapesI : shapes){
-        System.out.println(shapesI.getArea());
-        System.out.println(shapesI.getPerimeter());
-        System.out.println(shapesI.getNumOfEdges());
-        System.out.println(shapesI.getNumOfCorners());
-    }
+    // for(Shape shapesI : shapes){
+    //     System.out.println(shapesI.getArea());
+    //     System.out.println(shapesI.getPerimeter());
+    //     System.out.println(shapesI.getNumOfEdges());
+    //     System.out.println(shapesI.getNumOfCorners());
+    // }
       }
 }
