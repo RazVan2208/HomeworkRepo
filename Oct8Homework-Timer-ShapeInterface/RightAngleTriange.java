@@ -1,8 +1,7 @@
 public class RightAngleTriange implements Shape {
     private double mbase = 0;
     private double mheight = 0;
-    private double mside = 0;
-    public RightAngleTriange(double base, double height, double side){
+    public RightAngleTriange(double base, double height){
         mbase = base;
         mheight = height;
     }
@@ -11,7 +10,10 @@ public class RightAngleTriange implements Shape {
         return (mbase * mheight) / 2;
       }
     public double getPerimeter() {
-        return mbase + mheight + mside;
+        double hypotenuse;
+        hypotenuse = Math.pow(mbase, 2) + Math.pow(mheight, 2);
+        hypotenuse = Math.sqrt(hypotenuse);
+        return hypotenuse + mbase + mheight;
       }
     public int getNumOfEdges() {
         return 3;
