@@ -30,14 +30,13 @@ public class OrderedPoints {
     
 }
     public List<Double> getXValues(){
-        double nextValue = 0;
         for(double i : xPointList){
             System.out.println(i);
         }
         return xPointList;
     }
     public List<Double> getYValues(){
-        double nextValue = 0;
+
         for(double i : yPointList){
             System.out.println(i);
         }
@@ -46,5 +45,14 @@ public class OrderedPoints {
     public double getRenameX(int i){
         i = 0;
         return xPointList.get(i);
+    }
+    public double getYValue(int i){
+        i = 0;
+        return yPointList.get(i);
+    }
+    public void printPoints(){
+        for(int i = 0; i < xPointList.size(); i += 1){
+            System.out.println("(" + xPointList.get(i) + "," + yPointList.get(i) + ")");
+        }
     }
 }

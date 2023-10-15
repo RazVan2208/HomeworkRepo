@@ -24,7 +24,9 @@ public class Oct13HomeworkP2 {
       orderedPoints.addPoint(1.23434, 3.8);
       List<Double> xVals = orderedPoints.getXValues();
       List<Double> yVals = orderedPoints.getYValues();
-      getRenameX(4);
+      System.out.println(orderedPoints.getRenameX(4));
+      System.out.println(orderedPoints.getYValue(0));
+      orderedPoints.printPoints();
       }
 }
 
