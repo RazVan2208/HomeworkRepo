@@ -11,6 +11,8 @@ package Oct13HomeworkPart1;
 //	void printPoints() - Prints each of the (x,y) point pairs, ordered by the x-values
 // Hint: When you add a point, insert it into the correct spot to keep the list(s) ordered. This will make it easier.
 
+import java.util.List;
+
 public class Oct13HomeworkP2 {
     public static void main(String[] args) {
       OrderedPoints orderedPoints = new OrderedPoints();
@@ -19,8 +21,10 @@ public class Oct13HomeworkP2 {
       orderedPoints.addPoint(321, 2);
       orderedPoints.addPoint(45.8, 0);
       orderedPoints.addPoint(1.2, 0.3);
-      orderedPoints.addPoint(1.23434, 3);
-      orderedPoints.getXValues();
+      orderedPoints.addPoint(1.23434, 3.8);
+      List<Double> xVals = orderedPoints.getXValues();
+      List<Double> yVals = orderedPoints.getYValues();
+      getRenameX(4);
       }
 }
 

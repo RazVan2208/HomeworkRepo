@@ -7,16 +7,26 @@ public class OrderedPoints {
 
     }
     public void addPoint(double x, double y){
-        for(int i = 1; i < xPointList.size(); i += 1){
-            if(x > xPointList.get(i)){
-            xPointList.add(i - 1, x);
-            }
+        int size = xPointList.size();
+        if(size == 0){
+            xPointList.add(x);
+            yPointList.add(y);
+            return;
         }
-        for(int i = 0; i < yPointList.size(); i += 1){
-            if(y > xPointList.get(i)){
-            yPointList.add(i - 1, y);
+        for(int i = 0; i < xPointList.size(); i += 1){
+            if(x < xPointList.get(i)){
+                xPointList.add(i, x);
+                yPointList.add(i, y);
+                break;
             }
+            else if(x > xPointList.get(size - 1)){
+            xPointList.add(x);
+            yPointList.add(y);
+                break;
         }
+        }
+
+        
     
 }
     public List<Double> getXValues(){
@@ -25,5 +35,16 @@ public class OrderedPoints {
             System.out.println(i);
         }
         return xPointList;
+    }
+    public List<Double> getYValues(){
+        double nextValue = 0;
+        for(double i : yPointList){
+            System.out.println(i);
+        }
+        return yPointList;
+    }
+    public double getRenameX(int i){
+        i = 0;
+        return xPointList.get(i);
     }
 }
