@@ -13,10 +13,17 @@ public class Oct17HomeworkP1 {
 
     static void rangeList(double start, double stop, double stepSize){
         ArrayList<Double> returnList = new ArrayList<Double>();
+        if(start > 0) {
         for(double i = start; i >= start && i <= stop; i += stepSize){
-            returnList.add(Double.valueOf(Float.valueOf(String.valueOf(i))));
+            returnList.add(i);
         } 
            System.out.println(returnList); 
+    }if(stop < 0) {
+        for(double i = start; i <= start && i >= stop; i -= stepSize){
+            returnList.add(i);
+        } 
+           System.out.println(returnList); 
+    }
 
     }
     public static void main(String[] args) {
