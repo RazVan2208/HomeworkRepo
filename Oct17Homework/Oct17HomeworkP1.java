@@ -14,7 +14,7 @@ public class Oct17HomeworkP1 {
     static void rangeList(double start, double stop, double stepSize){
         ArrayList<Double> returnList = new ArrayList<Double>();
         for(double i = start; i >= start && i <= stop; i += stepSize){
-            returnList.add(i);
+            returnList.add(Double.valueOf(Float.valueOf(String.valueOf(i))));
         } 
            System.out.println(returnList); 
 
