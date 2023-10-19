@@ -1,5 +1,4 @@
 package Oct17Homework;
-import java.util.List;
 import java.util.*;
 import java.lang.Math;
 // ---------- QUESTION 2 -----------
@@ -15,14 +14,35 @@ When you've implemented the method, make an interactive program out of GhettoCha
 /*** */
 public class GhettoChatBot {
 
-    ArrayList<String> mQuestions = new ArrayList<String>();
-    ArrayList<String> mAnswers = new ArrayList<String>();
+    List<String> mQuestions = new ArrayList<String>();
+    List<String> mAnswers = new ArrayList<String>();
+    String[] mArrayQuestions;
+    String[] mArrayAnswers;
     public GhettoChatBot(){
 
     }
-    public GhettoChatBot(ArrayList<String> Questions, ArrayList<String> Answers){
+    public GhettoChatBot(List<String> Questions, List<String> Answers){
         mQuestions = new ArrayList<String>(Questions);
         mAnswers = new ArrayList<String>(Answers);
     }
-    
-}
+    public GhettoChatBot(String[] Questions, String[] Answers){
+        mArrayQuestions = new String[Questions.length];
+        mArrayAnswers = new String[Answers.length];
+    }
+    public void addQuestionAndAnswer(String Question, String Answer){
+        mQuestions.add(Question);
+        mAnswers.add(Answer);
+        for(int i = 0; i < mArrayQuestions.length; i += 1){
+            mArrayQuestions[i] = Question;
+        }
+        for(int i = 0; i < mArrayAnswers.length; i += 1){
+            mArrayAnswers[i] = Answer;
+        }
+    }
+    public String askQuestion(String Question){
+        for(String i : mQuestions){
+            if(i )
+        }
+    }
+    }
+
