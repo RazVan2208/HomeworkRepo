@@ -1,4 +1,6 @@
 package Oct17Homework;
+import java.util.*;
+import java.lang.Math;
 // ---------- QUESTION 2 -----------
 /*** Make a class called GhettoChatBot.
 There should be three constructors. 
@@ -13,6 +15,16 @@ When you've implemented the method, make an interactive program out of GhettoCha
 public class Oct17HomeworkP2 {
     
     public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in); 
+      List<String> mQuestions = new ArrayList<String>();
+      List<String> mAnswers = new ArrayList<String>(0);
+      GhettoChatBot ChatBot = new GhettoChatBot(mQuestions, mAnswers);
+      ChatBot.addQuestionAndAnswer("How are you?", "I am very good");
+      ChatBot.addQuestionAndAnswer("What is your name?", "My name is Razvan, the GhettoChatBoy");
+      ChatBot.addQuestionAndAnswer("What is your favourite FRC Team?", "Its 5036 duh");
+      System.out.println("Hey! My name is Razvan, the GhettoChatBoy, so... ask me a question");
+      String Question = scanner.nextLine();
+          System.out.println(ChatBot.askQuestion(Question)); 
 
     }
 }

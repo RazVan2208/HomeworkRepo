@@ -16,8 +16,8 @@ public class GhettoChatBot {
 
     List<String> mQuestions = new ArrayList<String>();
     List<String> mAnswers = new ArrayList<String>();
-    String[] mArrayQuestions;
-    String[] mArrayAnswers;
+    String[] mArrayQuestions = new String[0];
+    String[] mArrayAnswers = new String[0];
     public GhettoChatBot(){
 
     }
@@ -40,9 +40,13 @@ public class GhettoChatBot {
         }
     }
     public String askQuestion(String Question){
-        for(String i : mQuestions){
-            if(i )
+        String NoUnderstando = "I don't understand the question asked";
+        for(int b = 0; b < mQuestions.size(); b += 1){
+            if(mQuestions.get(b).equals(Question)){
+                return mAnswers.get(b);
+            } 
         }
+        return NoUnderstando;
     }
     }
 
