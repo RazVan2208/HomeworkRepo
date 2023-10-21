@@ -15,16 +15,17 @@ When you've implemented the method, make an interactive program out of GhettoCha
 public class Oct17HomeworkP2 {
     
     public static void main(String[] args) {
+      int AmountOfTimesRun = 0;
       Scanner scanner = new Scanner(System.in); 
       List<String> mQuestions = new ArrayList<String>();
       List<String> mAnswers = new ArrayList<String>(0);
-      GhettoChatBot ChatBot = new GhettoChatBot(mQuestions, mAnswers);
+      GhettoChatBot ChatBot = new GhettoChatBot(mQuestions, mAnswers, AmountOfTimesRun);
       ChatBot.addQuestionAndAnswer("How are you?", "I am very good");
       ChatBot.addQuestionAndAnswer("What is your name?", "My name is Razvan, the GhettoChatBoy");
       ChatBot.addQuestionAndAnswer("What is your favourite FRC Team?", "Its 5036 duh");
       System.out.println("Hey! My name is Razvan, the GhettoChatBoy, so... ask me a question");
       String Question = scanner.nextLine();
           System.out.println(ChatBot.askQuestion(Question)); 
-
+      AmountOfTimesRun += 1;
     }
 }
