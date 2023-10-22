@@ -52,6 +52,19 @@ public class Oct21HomeworkP3 {
                 System.out.println("Come ride with me to the distant shore");
                 timeSinceLastPrint = currentTime;
             }
+            if(timePassed >= 48890 && timePassed <= 50380){
+                System.out.println("Come ride with me to the distant shore");
+                timeSinceLastPrint = currentTime;
+            }
+            if(timePassed >= 51380 && timePassed <= 52640){
+                System.out.println("Come ride with me to the distant shore");
+                timeSinceLastPrint = currentTime;
+            }
+            if(timePassed >= 53640 && timePassed <= 57640){
+                System.out.println("Come ride with me to the distant shore");
+                timeSinceLastPrint = currentTime;
+            }
+            if(true){}
         }
     }
     public static void main(String[] args) {
