@@ -70,9 +70,10 @@ public class Oct21HomeworkP3 {
         PrintOutLyrics(SongLyrics, 4.25);
         SongLyrics.clear();
         SongLyrics.add("There was a distance between you and I");
+        SongLyrics.add("A misunderstanding once But now we look in the eye");
         PrintOutLyrics(SongLyrics, 10.11);
         SongLyrics.clear();
-        SongLyrics.add("A misunderstanding once But now we look in the eye");
+        SongLyrics.add("");
         PrintOutLyrics(SongLyrics, 21);
         SongLyrics.clear();
         SongLyrics.add("There's no load I can't hold, A road so rough this I know");
