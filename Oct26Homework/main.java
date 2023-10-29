@@ -1,5 +1,5 @@
 package Oct26Homework;
 
-public class FourInARowRunner {
+public class main {
     FourInARow newGame = new FourInARow();
 }
