@@ -3,36 +3,33 @@ package Oct26Homework;
 import java.util.ArrayList;
 
 public class FourInARow {
-    public char[][] playingGrid = new char[6][7];
+    public char[][] playingGrid = new char[][]{{' ', ' ', ' ', ' ', ' ', ' ', ' '},{' ', ' ', ' ', ' ', ' ', ' ', ' '},{' ', ' ', ' ', ' ', ' ', ' ', ' '},{' ', ' ', ' ', ' ', ' ', ' ', ' '},{' ', ' ', ' ', ' ', ' ', ' ', ' '},{' ', ' ', ' ', ' ', ' ', ' ', ' '}};
     public int mRow;
     public int mCol;
 
     public FourInARow(){
          
     }
-    public void placeRed(int row, int col){
-    boolean spaceIsTakenRed = false;
-    mRow = row;
-    mCol = col;
-        if(playingGrid[row][col] != 'R' && mRow < 6 && mCol < 7){
-            playingGrid[row][col] = 'R';
+    public void placeRed(int col){
+        for(int j = 5; j >= 0; j -= 1){
+            if(playingGrid[j][col] == ' '){
+                playingGrid[j][col] = 'R';
+                break;
+            }
         }
-
     }
-    public void placeYellow(int row, int col){
-    mRow = row;
-    mCol = col;
-        if(playingGrid[row][col] != 'Y' && mRow < 6 && mCol < 7){
-            playingGrid[row][col] = 'Y';
-        }
-        if(playingGrid[row][col] == 'Y' || playingGrid[row][col] == 'R'){
-            
+    public void placeYellow(int col){
+        for(int j = 5; j >= 0; j -= 1){
+            if(playingGrid[j][col] == ' '){
+                playingGrid[j][col] = 'Y';
+                break;
+            }
         }
     }
     public char[][] displayPlayGrid(){
         int d = 0;
-        for(int i = 0; i < playingGrid[0].length; i += 1){
-            for(int j = 0; j < playingGrid.length; j += 1){
+        for(int i = 0; i < 6; i += 1){
+            for(int j = 0; j < 7; j += 1){
                 d += 1;
                 System.out.print("[" + playingGrid[i][j] + "]");
                 if(d % 6 == 0){
@@ -41,5 +38,49 @@ public class FourInARow {
             }
         }
         return playingGrid;
+    }
+    public int DetermineGameWinner(){
+        int gameState = 0;
+         for(int i = 0; i < 6; i += 1){
+            for(int n = 0; n < 7 - 4; n += 1){
+               // playingGrid[i][0] = 'B';
+                if(playingGrid[i][n] == 'R' && playingGrid[i][n + 1] == 'R' && playingGrid[i][n + 2] == 'R' && playingGrid[i][n + 3] == 'R'){
+                    System.out.println("You did it, Four reds in a row!!!");
+                    return 1;
+                }
+                if(playingGrid[i][n] == 'Y' && playingGrid[i][n + 1] == 'Y' && playingGrid[i][n + 2] == 'Y' && playingGrid[i][n + 3] == 'Y'){
+                    System.out.println("You did it, Four yellows in a row!!!");
+                    return 2;
+                }
+            }
+        } 
+         for(int i = 0; i < 6 - 4; i += 1){
+            for(int n = 0; n < 7; n += 1){
+               // playingGrid[i][0] = 'B';
+                if(playingGrid[i][n] == 'R' && playingGrid[i + 1][n] == 'R' && playingGrid[i + 2][n] == 'R' && playingGrid[i + 3][n] == 'R'){
+                    System.out.println("You did it, Four reds in a col!!!");
+                    return 1;
+                }
+                if(playingGrid[i][n] == 'Y' && playingGrid[i + 1][n] == 'Y' && playingGrid[i + 2][n] == 'Y' && playingGrid[i + 3][n] == 'Y'){
+                    System.out.println("You did it, Four yellows in a col!!!");
+                    return 2;
+                }
+            }
+        }
+        for(int i = 0; i < 6 - 4; i += 1){
+            for(int n = 0; n < 6 - 4; n += 1){
+               // playingGrid[i][0] = 'B';
+                if(playingGrid[i][n] == 'R' && playingGrid[i + 1][n + 1] == 'R' && playingGrid[i + 2][n + 2] == 'R' && playingGrid[i + 3][n + 3] == 'R'){
+                    System.out.println("You did it, Four reds in a diagonal!!!");
+                    return 1;
+                }
+                if(playingGrid[i][n] == 'Y' && playingGrid[i + 1][n + 1] == 'Y' && playingGrid[i + 2][n + 2] == 'Y' && playingGrid[i + 3][n + 3] == 'Y'){
+                    System.out.println("You did it, Four yellows in a diagonal!!!");
+                    return 2;
+
+                }
+            }
+        } 
+    return 0; 
     }
 }
