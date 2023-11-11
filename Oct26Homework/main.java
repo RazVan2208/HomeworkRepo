@@ -17,6 +17,17 @@ public class main {
             break;
         }
     // Place Yellow in Col
+    newGame.DetermineGameWinner();
+    if(newGame.DetermineGameWinner() == 1){
+        System.out.println("RED WON WOOOOOOOO");
+        newGame.displayPlayGrid();
+        break;
+        }
+    if(newGame.DetermineGameWinner() == 2){
+        System.out.println("YELLOW WON WOOOOOOOO");
+        newGame.displayPlayGrid();
+        break;
+        }
     scanner.nextLine();
     System.out.println("User 2, play first move, only column is needed, if column is taken, place on top, or move to next column");
     int Ycol = scanner.nextInt();
