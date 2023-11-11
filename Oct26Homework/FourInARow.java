@@ -30,9 +30,8 @@ public class FourInARow {
         int d = 0;
         for(int i = 0; i < 6; i += 1){
             for(int j = 0; j < 7; j += 1){
-                d += 1;
                 System.out.print("[" + playingGrid[i][j] + "]");
-                if(d % 6 == 0){
+                if(j == 6){
                     System.out.println();
                 }
             }
@@ -68,7 +67,7 @@ public class FourInARow {
             }
         }
         for(int i = 0; i < 6 - 4; i += 1){
-            for(int n = 0; n < 6 - 4; n += 1){
+            for(int n = 0; n < 7 - 4; n += 1){
                // playingGrid[i][0] = 'B';
                 if(playingGrid[i][n] == 'R' && playingGrid[i + 1][n + 1] == 'R' && playingGrid[i + 2][n + 2] == 'R' && playingGrid[i + 3][n + 3] == 'R'){
                     System.out.println("You did it, Four reds in a diagonal!!!");
