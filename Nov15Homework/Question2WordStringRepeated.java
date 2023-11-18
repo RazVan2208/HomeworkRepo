@@ -9,16 +9,21 @@ import java.util.ArrayList;
 public class Question2WordStringRepeated{
     static ArrayList<Integer> getWordCounts(String str, ArrayList<String> words){
         ArrayList<Integer> RepeatedWords = new ArrayList<Integer>();
-  //      str = str.split(" ");
         int counter = 0;
-        for(int i = 0; i < words.size(); i += 1){
-    //   System.out.println(strArray[i]);
-        if(words.equals){
-            int counterA = 0;
-            counterA += 1;
+        ArrayList<String> strArray = new ArrayList<String>();
+        strArray.add(str);
+        for(int i = 0; i < strArray.size(); i += 1){
+          System.out.println(strArray.get(i));
+         // System.out.println(strArray[i]);
+          if(strArray.equals("world")){
             System.out.println("e");
-            RepeatedWords.add(1);
-        }
+          }
+     //   if(words.get(i).equals(str)){
+            //int counterA = 0;
+           // counterA += 1;
+           // System.out.println("e");
+      //      RepeatedWords.add(1);
+     //   }
         }
         return RepeatedWords;
     }
