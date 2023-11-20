@@ -1,5 +1,4 @@
 package Nov15Homework;
-import java.util.List;
 import java.util.ArrayList;
 // -------- QUESTION 2 -----------
 // Given a string with words separated by whitespace and a list of words, return a list containing the number of times each corresponding word appears in the string. 
@@ -9,28 +8,27 @@ import java.util.ArrayList;
 public class Question2WordStringRepeated{
     static ArrayList<Integer> getWordCounts(String str, ArrayList<String> words){
         ArrayList<Integer> RepeatedWords = new ArrayList<Integer>();
-        int counter = 0;
-        ArrayList<String> strArray = new ArrayList<String>();
-        strArray.add(str);
-        for(int i = 0; i < strArray.size(); i += 1){
-          System.out.println(strArray.get(i));
-         // System.out.println(strArray[i]);
-          if(strArray.equals("world")){
-            System.out.println("e");
-          }
-     //   if(words.get(i).equals(str)){
-            //int counterA = 0;
-           // counterA += 1;
-           // System.out.println("e");
-      //      RepeatedWords.add(1);
-     //   }
+        String strArray[] = null;
+        strArray = str.split(" ");
+         for(int n = 0; n < words.size(); n += 1){ 
+          int counter = 0;
+          RepeatedWords.add(0);
+        for(int i = 0; i < strArray.length; i += 1){  
+          if(strArray[i].equals(words.get(n))){
+            counter += 1;
+            RepeatedWords.set(n, counter);
+          }   
+          System.out.println("Detected " + strArray[i] + " " + counter); 
         }
+      }
+      System.out.println(RepeatedWords);
         return RepeatedWords;
     }
   public static void main(String[] args) {
-    String str = "Hello world, I am in a world, with a big world";
+    String str = "This is another example. Do you understand this example or do you need another example?";
     ArrayList<String> words = new ArrayList<String>();
-    words.add("world");
+    words.add("example");
+    words.add("you");
     getWordCounts(str, words);
   }
 }
