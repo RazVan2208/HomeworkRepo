@@ -1,6 +1,5 @@
-package Oct26Homework;
 import java.util.Scanner;
-public class main {
+public class Main {
     public static void main(String[] args) {
     FourInARow newGame = new FourInARow();
     Scanner scanner = new Scanner(System.in);

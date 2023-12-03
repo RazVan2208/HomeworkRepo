@@ -1,5 +1,3 @@
-package Oct26Homework;
-
 import java.util.ArrayList;
 
 public class FourInARow {
