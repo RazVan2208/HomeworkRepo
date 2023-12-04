@@ -10,7 +10,6 @@ public class Question4ArgFile {
         return a + b;
     }
     public static void main(String[] args) {
-        Scanner Adder = new Scanner(System.in);
         for(String arg : args){
             System.out.println(arg);
         }
