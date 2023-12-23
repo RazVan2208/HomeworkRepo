@@ -1,6 +1,6 @@
 package frc.robot.hardware;
 
-public interface InterfaceDrivetrainHardware {
+public interface IDrivetrainHardware {
     public void setLeftSidePower(double val);
 
     public void setRightSidePower(double val);

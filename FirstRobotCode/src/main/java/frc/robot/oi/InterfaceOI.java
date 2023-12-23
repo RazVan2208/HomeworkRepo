@@ -1,6 +1,6 @@
 package frc.robot.oi;
 
-public interface IOperatorInterface {
+public interface InterfaceOI {
     public double getDrivetrainForward();
 
     public double getDrivetrainRotate();

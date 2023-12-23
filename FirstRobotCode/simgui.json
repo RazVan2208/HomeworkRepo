@@ -4,5 +4,26 @@
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/Auto choices": "String Chooser"
     }
+  },
+  "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
+    "NT3@127.0.0.1:56600": {
+      "Publishers": {
+        "open": true
+      },
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "open": true
+    },
+    "visible": true
   }
 }
