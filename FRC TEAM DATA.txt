@@ -1,0 +1,3 @@
+5036,Rookie year: 2014,Team Name: The Robo Devils,WinLossTieRatio: [12, 12, 0],Sponsors!!!: [Argosy FOundation, TDSB, SWLCI, HONDA CANADA],Events attended: [Centennial Collge, DUrham COllege, DCMP],team drvetrain type: Tank
+2056,Rookie year: 2007,Team Name: OP Robotics,WinLossTieRatio: [67, 3, 0],Sponsors!!!: [ArcelorMittal Dofasco, GM&Orchard Park Secondary School],Events attended: [NewMarket, McMaster, DCMP],team drvetrain type: swerve
+4039,Rookie year: 2012,Team Name: MakeShift Robotics,WinLossTieRatio: [51, 17, 0],Sponsors!!!: [ArcelorMittal Dofasco, John Deere, Lincoln Electric, Magna International],Events attended: [NewMarket, NorthBay, DCMP],team drvetrain type: Swerve

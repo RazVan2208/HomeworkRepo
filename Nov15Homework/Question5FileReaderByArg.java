@@ -12,21 +12,21 @@ public class Question5FileReaderByArg {
     String absolutePath = ReadFile.getAbsolutePath();
     Scanner scan = null;
         for(String arg : args){
-            try {
-        scan = new Scanner(ReadFile);
-           while(scan.hasNextLine()){
-               System.out.println(scan.nextLine());
-           }
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        //     try {
+        // scan = new Scanner(ReadFile);
+        //    while(scan.hasNextLine()){
+        //        System.out.println(scan.nextLine());
+        //    }
+        // } catch (FileNotFoundException e){
+        //     e.printStackTrace();
+        // } catch (IOException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
            filePath = args[0].toString();
            for(int i = 1; i < args.length; i += 1){
                 keyWord = args[i];
-                System.out.println(keyWord);
+                System.out.println(keyWord + " Value of i is " + i);
            }
         }
     }
