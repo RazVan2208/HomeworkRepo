@@ -20,6 +20,8 @@ the format of your choosing is able to display data for each team.
 		averages notesScored - maybe this shows the average notes scored for each team
 
  */
+
+ //**IMPORTANT INFO BEFORE USING: DELETE THE CURRENT MATCH DATA, TEAM DATA, AND CYCLE LEADERBOARD. It will just make your experience easier as you do not have to work with old values */
 import java.io.IOException;
 
 // This part of the code is to take user input 
