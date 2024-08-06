@@ -1,3 +1,4 @@
 5036,District Points Earned: 90,Team Name: 667,WinLossTieRatio: [21, 21, 0],Events attended: [DCMP, DUR, CENT],Speaker or Amp Primary Choice: speakerteam drvetrain type: tank
 2056,District Points Earned: 365,Team Name: 1,WinLossTieRatio: [67, 3, 0],Events attended: [Mcmaster, Newmarket, dcmp],Speaker or Amp Primary Choice: speakerteam drvetrain type: swerve
 5036,District Points Earned: 90,Team Name: 67,WinLossTieRatio: [21, 21, 0],Events attended: [cent, dur, dcmp],Speaker or Amp Primary Choice: speakerteam drvetrain type: tank
+

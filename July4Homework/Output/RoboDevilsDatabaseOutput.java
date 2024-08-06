@@ -44,12 +44,9 @@ public class RoboDevilsDatabaseOutput {
         System.out.println("What team do you wish to view? Input team number");
         String teamNumber = userOverview.nextLine();
         
-        viewTeam(fileName, teamNumber);
-        rankAllTeamsByCycles(teamNumber, fileName);
-        rankAllTeamsByAvgCyclePerInputMatches(teamNumber, fileName);
-       
-            leaderboardWriter.write("Team Number: " + teamNumber + " Their Average Cycle score is: " + String.valueOf(rankAllTeamsByAvgCyclePerInputMatches(teamNumber, fileName)) + "\n");
-        
+        //viewTeam(fileName, teamNumber);
+        rankAllTeamsByCycles(fileName);
+        //rankAllTeamsByAvgCyclePerInputMatches(teamNumber, fileName);
         
 
         System.out.println("Do you wish to add another team to the leaderboard?");
@@ -66,33 +63,63 @@ public class RoboDevilsDatabaseOutput {
 
     }
 
-    public static void rankAllTeamsByCycles(String teamNumber, String fileName){
+    public static void rankAllTeamsByCycles(String fileName){
         int totalPointsScored = 0;
         int pointsScored = 0;
-        
-        
+        List<List<String>> finalInfo = new ArrayList<>();
+        ArrayList<Integer> cycleList = new ArrayList<>();
+        List<List<String>> finalFINALInfo = new ArrayList<>(cycleList.size());
+        int highestCycle = 0;
+        int checkCount = 0;
+        int x = 0;
+
        try {
         File readFile = new File(fileName);
             Scanner dataReader = new Scanner(readFile).useDelimiter(",");
 			if(readFile.exists()){
+                dataReader.nextLine();
         while (dataReader.hasNextLine()) {
+            
             ArrayList<String> teamInfo = new ArrayList<String>();
             String data = dataReader.nextLine();
-           if(data.contains(teamNumber)){
+            
             String[] teamStuff = data.split(",");
                     for(String i : teamStuff){
                         teamInfo.add(i);
-                     }
+                    }
+            // System.out.println(teamInfo);
             pointsScored = Integer.valueOf(teamInfo.get(5));
+            finalInfo.add(teamInfo);
             
-            totalPointsScored += pointsScored;
+            
+            
 
+            //totalPointsScored += pointsScored;
             
-            }else {
-              //  dataReader.nextLine();
+            }
+
+        for(List<String> i : finalInfo){
+            pointsScored = Integer.valueOf(i.get(5));
+            cycleList.add(pointsScored); 
+    }
+        Collections.sort(cycleList, Collections.reverseOrder());
+        
+        System.out.println(cycleList);
+        for(List<String> i : finalInfo){
+            finalFINALInfo.add(i);
+        }
+
+        for(List<String> i : finalInfo){
+            pointsScored = Integer.valueOf(i.get(5));
+            for(int j = 0; j < cycleList.size(); j += 1){
+                if(cycleList.get(j) == pointsScored){
+                    finalFINALInfo.set(j, i);
+                }
             }
         }
-        System.out.println("The team's total amount of cycles (notes successfuly Scored) over inputted matches is " + totalPointsScored);
+        System.out.println(finalFINALInfo);
+        
+        //System.out.println("The team's total amount of cycles (notes successfuly Scored) over inputted matches is " + totalPointsScored);
         dataReader.close();
     }else{
 
