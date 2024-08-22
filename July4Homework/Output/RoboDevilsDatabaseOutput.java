@@ -89,6 +89,8 @@ public class RoboDevilsDatabaseOutput {
                     }
             // System.out.println(teamInfo);
             pointsScored = Integer.valueOf(teamInfo.get(5));
+
+            // add each team input to make the list of lists
             finalInfo.add(teamInfo);
             
             
@@ -98,17 +100,44 @@ public class RoboDevilsDatabaseOutput {
             
             }
 
+            // add the scores to a seperate list that will later be sorted
         for(List<String> i : finalInfo){
             pointsScored = Integer.valueOf(i.get(5));
             cycleList.add(pointsScored); 
     }
+        // sort the CYCLES numerically so 58,32,444 becomes 444,58,32
         Collections.sort(cycleList, Collections.reverseOrder());
         
+        //print-check
         System.out.println(cycleList);
+
+        // create a new list to reset all elements (I really only did this so my new list wasnt empty)
         for(List<String> i : finalInfo){
             finalFINALInfo.add(i);
         }
 
+
+        // iterate through the final info list, then get the cycles of each input (example input 1 has team 9999 with 8 cycles)
+        // after that, iterate through the cycles in their list (Remember 444,58,32?)
+        // if the cycle amount (lets say 444 is the first) equals the cycle from the current list we're in (in final Info), reset that element to the correct one
+        // basically: 
+        /*
+         * original formation:
+         * cycleList = 8,7,23,21
+         * after order: cycleList = 23,21,8,7
+         * 
+         * original List of Lists formation:
+         * team9999....cycles 7, team8888...cycles 23, team7777...cycles 21, team6666...cycles8
+         * 
+         * going into for loops here:
+         * get the cycles from each team indivually: first up team 9999
+         * pointsScored = 7
+         * iterate through the cycle list; does 7 equal to 23? no, move on
+         * does 7 equal to 21? no move on
+         * does 7 equal to 8? no move on
+         * does 7 equal to 7? yes, set the list of info from team 9999 at the index of cycle list (think of it this way: 4 team inputs, 4 different cycle amounts, creating an equal sized list)
+         * therefore, putting team9999 at the end of the list.
+         */
         for(List<String> i : finalInfo){
             pointsScored = Integer.valueOf(i.get(5));
             for(int j = 0; j < cycleList.size(); j += 1){

@@ -1,8 +1,8 @@
 package July4Homework.Input;
 import java.io.File;
 import java.util.*;
-import July4Homework.Input.RoboDevilsDatabaseInterface;
-import July4Homework.Output.RoboDevilsDatabaseOutput;
+
+
 
 import java.io.FileWriter;   // Import the FileWriter class
 /*
@@ -28,19 +28,19 @@ import java.io.IOException;
 public class RoboDevilsDatabaseInput{
     static Scanner userInput = new Scanner(System.in);
 	public static ArrayList<String> headers = new ArrayList<String>();
-	static RoboDevilsDatabaseOutput outputSteal = new RoboDevilsDatabaseOutput();
-	public static ArrayList<String> returnList = new ArrayList<String>();
+
+	
 	// Declaring the basic text files, and .csv files. Creates files and the headers.
 	public static void main(String[] args) throws IOException {
 		int notesScored = 0;
 
-		String fileName = "FRC TEAM DATA.txt";
+		
 		String matchFileName = "FRC MATCH DATA.csv";
-		File teamData = new File(fileName);
+		
 		File matchData = new File(matchFileName);
-		teamData.createNewFile();
+	
 		matchData.createNewFile();
-		FileWriter myWriter = new FileWriter(teamData, true);
+	
 		FileWriter matchWriter = new FileWriter(matchData, true);
 
 		String teamHeader = "Team Number: ";
@@ -68,25 +68,9 @@ public class RoboDevilsDatabaseInput{
 			matchWriter.write(headers.toString() + "\n");
 	// This allows the user to input basic team data and team match data until they choose not to. You can input multiple matches one after another due to the while loop	
 	for(int i = 0; ; i += 1){
-		
-		String teamNumberData = inputNumberOfTeam();
+	
 
-		String overAllRanking = inputOverallRanking();
-
-		String districtPoints = inputDistrictPoints();
-
-		String WinLossTieRatio = inputWinLossTieRatio().toString();
-
-		userInput.nextLine();
-		ArrayList <String> eventsAttended = inputNameOfEventsAttended();
-
-		userInput.nextLine();
-
-		String speakerOrAmp = inputSpeakerOrAmp();
-
-		String teamDrivebaseData = inputDriveBase();
-
-		System.out.println("Now we will move to match data");
+		System.out.println("Lets Input match data");
 
 		userInput.nextLine();
 
@@ -102,7 +86,7 @@ public class RoboDevilsDatabaseInput{
 		if(redo.contains("no")){
 		//	System.out.println("The Team's notes scored over these two rounds was:" + tempStorage);
 			break;
-		} else if (redo.contains("yes")) {
+		} else {
 
 		
 		}
@@ -122,32 +106,9 @@ public class RoboDevilsDatabaseInput{
 		
 		
 	// Try - Catch block which allows the writer to append both the basic data and the match data	
-		try {
-			
-		
-			
-			myWriter.write(teamNumberData);
-			myWriter.append(',');
-			myWriter.append("District Points Earned: " + districtPoints);
-			myWriter.append(',');
-			myWriter.append("Team Name: " + overAllRanking);
-			myWriter.append(',');
-			myWriter.append("WinLossTieRatio: " + WinLossTieRatio);
-			myWriter.append(',');
-			myWriter.append("Events attended: " + eventsAttended.toString());
-			myWriter.append(',');
-			myWriter.append("Speaker or Amp Primary Choice: " + speakerOrAmp);
-			myWriter.append("team drvetrain type: " + teamDrivebaseData + "\n");
-			
-			
-			
-			
-			myWriter.flush();
-			
-			
+		try {	
 			
 			if(askUserForNextInput == false){
-				myWriter.close();
 				matchWriter.close();
 				return;
 			}
@@ -158,87 +119,8 @@ public class RoboDevilsDatabaseInput{
 	
 	}
 
-	//Input overall year-based ranking for the inputted team
-	public static String inputOverallRanking(){
-		
-        System.out.println("Input This season's overall ranking in the Ontario District");
-        String teamName = userInput.nextLine();
-        return teamName;
-    }
 
-	// Input the number of the team
-    public static String inputNumberOfTeam(){
-        System.out.println("Input Team Number");
-        String teamNumber = userInput.nextLine();
-        return teamNumber;
-    }
-
-	// Input the type of drivetrain
-	public static String inputDriveBase(){
-        System.out.println("Input DriveBase type");
-        String teamDrivetrain = userInput.nextLine();
-        return teamDrivetrain;
-    }
-
-	// Input the Win Loss Tie Ratio (Ex: 65:32:0)
-    public static ArrayList<Integer> inputWinLossTieRatio(){
-        ArrayList<Integer> WinLossTieArr = new ArrayList<Integer>();
-        System.out.println("Input Team W:L:T Ratio");
-        int winRatio = userInput.nextInt();
-        WinLossTieArr.add(winRatio);
-        int lossRatio = userInput.nextInt();
-        WinLossTieArr.add(lossRatio);
-        int tieRatio = userInput.nextInt();
-        WinLossTieArr.add(tieRatio);
-
-        return WinLossTieArr;
-    }
-
-	// Input accumulated District points
-    public static String inputDistrictPoints(){
-        System.out.println("Input Amount of District Points this year");
-        String year = userInput.nextLine();
-        return year;
-    }
-
-	// Useless will delete
-    public static ArrayList<String> inputSponsors(){
-        System.out.println("Input Sponsor Names, once done type end, exactly lowercase");
-        ArrayList<String> sponsors = new ArrayList<String>();
-		while(true){
-			String Sponsor = userInput.nextLine();
-			if(Sponsor.equals("end")){
-				break;
-			}
-			sponsors.add(Sponsor);
-			
-		}
-        
-        return sponsors;
-        
-    } 
-
-	// Input the events attended (Can be short form such as Dur for Durham)
-    public static ArrayList<String> inputNameOfEventsAttended(){
-        System.out.println("Input Event names, this goes by the Canadian basis of 2 District and 1 Provincial");
-        ArrayList<String> events = new ArrayList<String>();
-        String event1 = userInput.nextLine();
-        events.add(event1);
-        String event2 = userInput.nextLine();
-        events.add(event2);
-        String event3 = userInput.nextLine();
-        events.add(event3);
-
-        return events;
-    }
-
-	// Input whether the team mostly focuses on Speaker or Amp
-	public static String inputSpeakerOrAmp(){
-		
-        System.out.println("Does the team mainly do Speaker or mainly do Amp? Answer 1 of two");
-        String teamChoice = userInput.nextLine();
-        return teamChoice;
-    }
+	
 
 	// Ask the user if they would like to input another team once they are done with matches for the previous team
 	public static boolean askUser(){
@@ -253,21 +135,21 @@ public class RoboDevilsDatabaseInput{
 
 	// Input all useful match data. This will be a new arraylist for each new input
 	public static ArrayList<String> inputMatches(){
-		
+		ArrayList<String> returnList = new ArrayList<String>();
 		
 		for(int i = 0; ; i += 1){
 		
-		System.out.println("Team number Again for logging purposes:");
+		System.out.println("Team number for logging purposes:");
 		String teamNumber = userInput.nextLine();
 		returnList.add(teamNumber);
 
-		System.out.println("Input which Alliance the team belonged to (r/b)");
+		System.out.println("Input which Alliance the team belonged to (red/blue) type it out");
 		String alliance = userInput.nextLine();
 
 		System.out.println("Input the match number");
 		String matchNumber = userInput.nextLine();
 
-		System.out.println("Input whether the team left in auto(t/f)");
+		System.out.println("Input whether the team left in auto (true/false) type it out");
 		boolean autoLeave = userInput.nextBoolean();
 
 
@@ -282,16 +164,16 @@ public class RoboDevilsDatabaseInput{
 
 		userInput.nextLine();
 		
-		System.out.println("Input whether the team scored in trap(t/f)");
+		System.out.println("Input whether the team scored in trap (true/false) type it out");
 		boolean trap = userInput.nextBoolean();
 		
-		System.out.println("Input whether the team is onstage(t/f)");
+		System.out.println("Input whether the team is onstage (true/false) type it out");
 		boolean isOnstage = userInput.nextBoolean();
 
-		System.out.println("Input whether there was a Harmony(t/f)");
+		System.out.println("Input whether there was a Harmony (true/false) type it out");
 		boolean harmonyAcheived = userInput.nextBoolean();
 
-		System.out.println("Input whether the team parked or not (t/f)");
+		System.out.println("Input whether the team parked or not (true/false) type it out");
 		boolean parkAcheived = userInput.nextBoolean();
 		
 		userInput.nextLine();
