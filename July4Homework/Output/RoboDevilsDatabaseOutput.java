@@ -1,4 +1,3 @@
-package July4Homework.Output;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +9,10 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Scanner;
-import July4Homework.Input.RoboDevilsDatabaseInput;
+
+import AverageCycleClass.AvgCycles;
+import AveragePointsClass.AvgPoints;
+
 
 /*
  * Decide on several stats to collect for scouting for the 2024 FRC Game.
@@ -21,7 +23,7 @@ particular match and stores the data in a file in a format of your choice.
 Write another program that is able to open such a file and based on input in
 the format of your choosing is able to display data for each team.
 	Example of inputs: 
-		view 5036 - maybe this displays the match data for 5036
+	DONE	view 5036 - maybe this displays the match data for 5036
 		rankAllTeams - maybe this ranks all the teams by some metric
 		rankAllTeams notesScored - maybe this ranks all the teams by the number of notes scored
 		averages notesScored - maybe this shows the average notes scored for each team
@@ -29,135 +31,64 @@ the format of your choosing is able to display data for each team.
  */
 public class RoboDevilsDatabaseOutput {
     static Scanner userOverview = new Scanner(System.in);
-    static RoboDevilsDatabaseInput inputVals = new RoboDevilsDatabaseInput();
+    
     File leaderboardData = new File("FRC_AverageCycle_Leaderboard.txt");
 
     
     
     public static void main(String[] args) {
-        try {
-        File leaderboardData = new File("FRCAverageCycleLeaderboard.txt");
-        leaderboardData.createNewFile();
-        FileWriter leaderboardWriter = new FileWriter(leaderboardData, false);
+
+        int quitAmount = 0;
         String fileName = "FRC MATCH DATA.csv";
-        while(true){
-        System.out.println("What team do you wish to view? Input team number");
-        String teamNumber = userOverview.nextLine();
+        System.out.println("What do you wish to do with the current program? Rank By Cycles or View a Team (rank/view)");
+        String decision = userOverview.nextLine();
+        if(decision.contains("view")){
         
-        //viewTeam(fileName, teamNumber);
-        rankAllTeamsByCycles(fileName);
+        System.out.println("What team do you wish to view? Input team number. Once you are done, say quit to exit.");
+        String teamNumber = userOverview.nextLine();
+         while(quitAmount < 1){
+         viewTeam(fileName, teamNumber);
+         System.out.println("\n" + "Go again?");
+        String viewTeamQuit = userOverview.nextLine();
+         if(viewTeamQuit.contains("quit") || viewTeamQuit.contains("no")){
+             quitAmount += 1;
+         } else {
+            System.out.println("Would you like to view another team?");
+            String secondaryView = userOverview.nextLine();
+            if(secondaryView.contains("no")){
+                viewTeam(fileName, teamNumber);
+            } else {
+            System.out.println("What new team?");
+            teamNumber = userOverview.nextLine();
+            viewTeam(fileName,teamNumber);
+        }
+         }
+     }
+        } else if (decision.contains("rank")){
+            AvgCycles averageCycles = new AvgCycles();
+            AvgPoints averagePoints = new AvgPoints();
+            System.out.println("Here are all the teams ranked by their average Cycles" + '\n' +  averageCycles.rankAllTeams());
+            System.out.println("Here are all the teams ranked by their average Points Scored" +'\n'+ averagePoints.rankAllTeams());
+        }
+     }
+    
+        
+      
+    
+        
+    
+        
         //rankAllTeamsByAvgCyclePerInputMatches(teamNumber, fileName);
         
-
-        System.out.println("Do you wish to add another team to the leaderboard?");
-        if(userOverview.nextLine().contains("no")){
-            leaderboardWriter.close();
-            break;
-        }
-        } } catch (IOException e) {
-            // TODO: handle exception
-        }
+        
+        
         
         
 
 
-    }
-
-    public static void rankAllTeamsByCycles(String fileName){
-        int totalPointsScored = 0;
-        int pointsScored = 0;
-        List<List<String>> finalInfo = new ArrayList<>();
-        ArrayList<Integer> cycleList = new ArrayList<>();
-        List<List<String>> finalFINALInfo = new ArrayList<>(cycleList.size());
-        int highestCycle = 0;
-        int checkCount = 0;
-        int x = 0;
-
-       try {
-        File readFile = new File(fileName);
-            Scanner dataReader = new Scanner(readFile).useDelimiter(",");
-			if(readFile.exists()){
-                dataReader.nextLine();
-        while (dataReader.hasNextLine()) {
-            
-            ArrayList<String> teamInfo = new ArrayList<String>();
-            String data = dataReader.nextLine();
-            
-            String[] teamStuff = data.split(",");
-                    for(String i : teamStuff){
-                        teamInfo.add(i);
-                    }
-            // System.out.println(teamInfo);
-            pointsScored = Integer.valueOf(teamInfo.get(5));
-
-            // add each team input to make the list of lists
-            finalInfo.add(teamInfo);
-            
-            
-            
-
-            //totalPointsScored += pointsScored;
-            
-            }
-
-            // add the scores to a seperate list that will later be sorted
-        for(List<String> i : finalInfo){
-            pointsScored = Integer.valueOf(i.get(5));
-            cycleList.add(pointsScored); 
-    }
-        // sort the CYCLES numerically so 58,32,444 becomes 444,58,32
-        Collections.sort(cycleList, Collections.reverseOrder());
-        
-        //print-check
-        System.out.println(cycleList);
-
-        // create a new list to reset all elements (I really only did this so my new list wasnt empty)
-        for(List<String> i : finalInfo){
-            finalFINALInfo.add(i);
-        }
-
-
-        // iterate through the final info list, then get the cycles of each input (example input 1 has team 9999 with 8 cycles)
-        // after that, iterate through the cycles in their list (Remember 444,58,32?)
-        // if the cycle amount (lets say 444 is the first) equals the cycle from the current list we're in (in final Info), reset that element to the correct one
-        // basically: 
-        /*
-         * original formation:
-         * cycleList = 8,7,23,21
-         * after order: cycleList = 23,21,8,7
-         * 
-         * original List of Lists formation:
-         * team9999....cycles 7, team8888...cycles 23, team7777...cycles 21, team6666...cycles8
-         * 
-         * going into for loops here:
-         * get the cycles from each team indivually: first up team 9999
-         * pointsScored = 7
-         * iterate through the cycle list; does 7 equal to 23? no, move on
-         * does 7 equal to 21? no move on
-         * does 7 equal to 8? no move on
-         * does 7 equal to 7? yes, set the list of info from team 9999 at the index of cycle list (think of it this way: 4 team inputs, 4 different cycle amounts, creating an equal sized list)
-         * therefore, putting team9999 at the end of the list.
-         */
-        for(List<String> i : finalInfo){
-            pointsScored = Integer.valueOf(i.get(5));
-            for(int j = 0; j < cycleList.size(); j += 1){
-                if(cycleList.get(j) == pointsScored){
-                    finalFINALInfo.set(j, i);
-                }
-            }
-        }
-        System.out.println(finalFINALInfo);
-        
-        //System.out.println("The team's total amount of cycles (notes successfuly Scored) over inputted matches is " + totalPointsScored);
-        dataReader.close();
-    }else{
-
-    }
-    } catch (IOException e) {
-        // TODO: handle exception
-    }
     
-    } 
+
+    
 
     // views specifically team 5036, for now, and maps Headers and User inputs together so it can be read easily.
     public static void viewTeam(String fileName, String teamNumber){
@@ -165,7 +96,7 @@ public class RoboDevilsDatabaseOutput {
         //Declaring Arraylists (headers comes from input file) and the map
        ArrayList<String> headers = new ArrayList<String>();
         LinkedHashMap<String, String> inputMap = new LinkedHashMap<String, String>();
-        LinkedHashMap<String, Integer> sortedLeaderBoard = new LinkedHashMap<String, Integer>();
+        Scanner userMatchRequest = new Scanner(System.in);
         
 
        String teamHeader = "Team Number: ";
@@ -174,6 +105,7 @@ public class RoboDevilsDatabaseOutput {
 			String teamPointsScored = "Team's Points scored";
 			String opposingTeamScore = "Opposing team Score";
 			String teamCycles = "Cycles in match";
+            String teamNotes = "Notes Scored: ";
 			String autoLeave = "Left in auto period?";
 			String trapScored = "Trap Score Acheived?";
 			String OnstageAcheived = "Onstage climb Acheived?";
@@ -185,27 +117,42 @@ public class RoboDevilsDatabaseOutput {
 			headers.add(teamPointsScored);
 			headers.add(opposingTeamScore);
 			headers.add(teamCycles);
+            headers.add(teamNotes);
 			headers.add(autoLeave);
 			headers.add(trapScored);
 			headers.add(OnstageAcheived);
 			headers.add(harmonyCondition);
 			headers.add(parkedEndgame);
 
-       
+        
+
        
         try {
 			File readFile = new File(fileName);
             Scanner dataReader = new Scanner(readFile).useDelimiter(",");
 
 			if(readFile.exists()){
-            
-			System.out.println("This team Number's data file exists! Lets read it shall we?");
+            System.out.println("Is there a certain match you are looking for? If so, input number, otherwise press space and the latest match data will be provided.");
+            String match = userMatchRequest.nextLine();
+           
 
             // while there are still lines, read the file and break up the team info into seperate strings to add into the ArrayList teamInfo
 		 	 while (dataReader.hasNextLine()) {
                 ArrayList<String> teamInfo = new ArrayList<String>();
                  String data = dataReader.nextLine();
-                if(data.contains(teamNumber)){
+                if(data.contains(teamNumber) && !(match.isEmpty())){
+                    
+                    String[] teamStuff = data.split(",");
+                    for(String i : teamStuff){
+                        teamInfo.add(i);
+                     }
+                    if(teamInfo.get(2).equals(match)){
+                     //Map each header to each string, this works because each arraylist *should* be the same length
+                     for(int i = 0; i < headers.size(); i += 1){
+                        inputMap.put(headers.get(i), teamInfo.get(i));
+                     }
+                    }
+                } else if(match.isEmpty()){
                     String[] teamStuff = data.split(",");
                     for(String i : teamStuff){
                         teamInfo.add(i);
@@ -215,9 +162,6 @@ public class RoboDevilsDatabaseOutput {
                      for(int i = 0; i < headers.size(); i += 1){
                         inputMap.put(headers.get(i), teamInfo.get(i));
                      }
-                     
-                } else {
-
              }
              
          // System.out.println(headersToTeamMap);
@@ -310,3 +254,4 @@ public class RoboDevilsDatabaseOutput {
     // }
     
 }
+

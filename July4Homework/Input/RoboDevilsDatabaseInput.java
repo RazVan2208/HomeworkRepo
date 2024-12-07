@@ -49,30 +49,41 @@ public class RoboDevilsDatabaseInput{
 			String teamPointsScored = "Team's Points scored";
 			String opposingTeamScore = "Opposing team Score";
 			String teamCycles = "Cycles in match";
+			String teamNotes = "Notes Scored: ";
 			String autoLeave = "Left in auto period?";
 			String trapScored = "Trap Score Acheived?";
 			String OnstageAcheived = "Onstage climb Acheived?";
 			String harmonyCondition = "Harmony condition Acheived?";
 			String parkedEndgame = "Parked in endgame?";
+		
 			headers.add(teamHeader);
 			headers.add(teamAlliance);
 			headers.add(matchNumber);
 			headers.add(teamPointsScored);
 			headers.add(opposingTeamScore);
 			headers.add(teamCycles);
+			headers.add(teamNotes);
 			headers.add(autoLeave);
 			headers.add(trapScored);
 			headers.add(OnstageAcheived);
 			headers.add(harmonyCondition);
 			headers.add(parkedEndgame);
-			matchWriter.write(headers.toString() + "\n");
+
+			System.out.println("Is this a continuing file from a previous input? Yes or No");
+			String reWrite = userInput.nextLine();
+			
+			if(reWrite.contains("yes")){
+
+			} else {
+				matchWriter.write(headers.toString() + "\n");
+			}
+			
 	// This allows the user to input basic team data and team match data until they choose not to. You can input multiple matches one after another due to the while loop	
 	for(int i = 0; ; i += 1){
 	
 
 		System.out.println("Lets Input match data");
 
-		userInput.nextLine();
 
 
 		// Adds match data to the .csv file alongside headers
@@ -158,9 +169,10 @@ public class RoboDevilsDatabaseInput{
 		String respectiveScore = userInput.nextLine();
 		System.out.println("Input Overall opposing team score");
 		String opposingScore = userInput.nextLine();	
-        System.out.println("Input the Number of average cycles (1 note from pickup to score) per game. Ex: 7 cycles = 7 notes scored. (if all count)");
+        System.out.println("Input the Number of average cycles (1 note from pickup to score) per game. Ex: 7 cycles (if all count)");
         String teamCycles = userInput.nextLine();
-		
+		System.out.println("Input the Number of notes scored per game");
+		String teamNotes = userInput.nextLine();
 
 		userInput.nextLine();
 		
@@ -183,6 +195,7 @@ public class RoboDevilsDatabaseInput{
 		returnList.add(respectiveScore);
 		returnList.add(opposingScore);
 		returnList.add(teamCycles);
+		returnList.add(teamNotes);
 		returnList.add(String.valueOf(autoLeave));
 		returnList.add(String.valueOf(trap));
 		returnList.add(String.valueOf(isOnstage));
