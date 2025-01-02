@@ -23,18 +23,32 @@ public class OperatorInterface implements OperatorInterfaceOI {
     }
     //it'll happen eventually
 
-    public boolean pidSecondTierButtom(){
-        return false;
+    public boolean armOpenLoopButton(){
+        return operatorController.getRawButton(0);
     }
 
-    public double controllerOpenLoopArmPower(){
+     public boolean intakeOpenLoopButton(){
+        return operatorController.getRawButton(1);
+    }
+
+    public double controllerOpenLoopArm(){
         return operatorController.getRawAxis(1);
     }
 
-    public double controllerOpenLoopIntakePower(){
+    public double controllerOpenLoopIntake(){
         return operatorController.getRawAxis(3);
     }
 
+    public boolean deployArticulatedIntake(){
+        return operatorController.getRawButton(2);
+    }
+
+    public boolean outtakeFirstTier(){
+        return operatorController.getRawButton(3);
+    }
     
+    public boolean outtakeSecondTier(){
+        return operatorController.getRawButton(4);
+    }
     
 }

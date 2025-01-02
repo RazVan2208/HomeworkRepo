@@ -8,12 +8,16 @@ public interface OperatorInterfaceOI {
     public boolean pidArmButtom();
     //it'll happen eventually
 
-    public boolean pidSecondTierButtom();
+    public double controllerOpenLoopArm();
 
-    public double controllerOpenLoopArmPower();
+    public double controllerOpenLoopIntake();
 
-    public double controllerOpenLoopIntakePower();
-
+    public boolean armOpenLoopButton();
     
+    public boolean intakeOpenLoopButton();
+
+    public boolean outtakeFirstTier();
+    
+    public boolean outtakeSecondTier();
     
 }

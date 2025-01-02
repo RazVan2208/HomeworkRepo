@@ -11,6 +11,7 @@ import com.ctre.phoenix.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.robot.RobotMap;
 
 public class armHardware implements armHardwareOI{
     
@@ -23,12 +24,12 @@ public class armHardware implements armHardwareOI{
     private Encoder articulatedArmEncoder;
 
     public armHardware(){
-        intakeTop = new CANSparkMax(0, MotorType.kBrushed);
-        intakeBottom = new CANSparkMax(0, MotorType.kBrushless);
-        articulatedArm = new CANSparkMax(0, MotorType.kBrushed);
+        intakeTop = new CANSparkMax(RobotMap.Intake_Top_CAN_ID, MotorType.kBrushed);
+        intakeBottom = new CANSparkMax(RobotMap.Intake_Bottom_CAN_ID, MotorType.kBrushless);
+        articulatedArm = new CANSparkMax(RobotMap.Intake_Arm_CAN_ID, MotorType.kBrushed);
         intakeBottomEncoder = intakeBottom.getEncoder();
         intakeTopEncoder = new Encoder(0,1, false, Encoder.EncodingType.k4X);
-        articulatedArmEncoder = new Encoder(0,1, false, Encoder.EncodingType.k4X);
+        articulatedArmEncoder = new Encoder(2,3, false, Encoder.EncodingType.k4X);
 
     }
 
@@ -68,4 +69,6 @@ public class armHardware implements armHardwareOI{
         intakeTopEncoder.reset();
         articulatedArmEncoder.reset();
     }
+
+    
 }

@@ -7,6 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.hardware.*;
+import frc.robot.subsystems.*;
+import frc.robot.Oi.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -15,10 +19,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  private static final String MIDDLE_AUTO = "Middle Auto";
+  private static final String L_R_AUTO1 = "LEFT OR RIGHT Auto Choice 1";
+  private static final String L_R_AUTO2 = "LEFT OR RIGHT Auto Choice 2";
+
+
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  OperatorInterface oi;
+  drivetrain drivetrain;
+  articulatedArm arm;
+
+  armHardwareOI armHardware;
+  drivetrainHardwareOI drivetrainHardware;
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -26,9 +41,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
+    m_chooser.setDefaultOption("Middle Balance Auto", MIDDLE_AUTO);
+    m_chooser.addOption("Shoot Preload, drive out", L_R_AUTO1);
+    m_chooser.addOption("Shoot Preload, drive out, new cube, shoot load", L_R_AUTO2);
     SmartDashboard.putData("Auto choices", m_chooser);
+    
+    drivetrainHardware = new drivetrainHardware();
+    armHardware = new armHardware();
+
+    oi = new OperatorInterface();
+    drivetrain = new drivetrain(drivetrainHardware);
+    arm = new articulatedArm(armHardware);
+
+    
+    drivetrainHardware.resetEncoderPos();
+
+ 
   }
 
   /**
@@ -38,8 +66,18 @@ public class Robot extends TimedRobot {
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */
+
+  private boolean isInAutoTime(long startTime) {
+    long currentTime = System.currentTimeMillis();
+    if (!isAutonomous()) return false;
+    if ((currentTime - startTime) > 15000) return false;
+    return true;
+  }
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+
+    SmartDashboard.putNumber("Intake Encoder Pos:", arm.currentEncoderPosition());
+  }
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
@@ -56,29 +94,57 @@ public class Robot extends TimedRobot {
     m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
+
+    m_autoSelected = m_chooser.getSelected();
+
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
-    }
+  
   }
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    drivetrain.ArcadeDrive(0, 0);
+    arm.setOpenLoopArmPower(0);
+    arm.setOpenLoopIntakePower(0);
+  }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+
+    double forward = oi.getControllerDrive();
+    double rotate = oi.getControllerRotate();
+    drivetrain.ArcadeDrive(forward * 0.8, rotate * 0.8);
+
+
+    if(oi.armOpenLoopButton()){
+      arm.setOpenLoopArmPower(oi.controllerOpenLoopArm() * 0.2);
+    } else if(oi.deployArticulatedIntake()){
+      arm.setOpenLoopIntakePower(-1); // intake
+    } 
+
+    if(oi.intakeOpenLoopButton()){
+      arm.setOpenLoopIntakePower(oi.controllerOpenLoopIntake() * 0.2);
+    } else if(oi.deployArticulatedIntake()) {
+      arm.articulatedArmMovement(-10); // go down and keep down
+    } else {
+      arm.articulatedArmMovement(-150); // go back up
+    }
+
+    if(oi.outtakeFirstTier()){
+      arm.articulatedArmMovement(-30); // go not all the way down, but enough to roll cube into first tier
+      arm.setOpenLoopArmPower(1); // shoot out
+    } else if (oi.outtakeSecondTier()){
+      arm.articulatedArmMovement(-90); // go halfway/some part down but enough to shoot into second tier
+      arm.setOpenLoopArmPower(1); // shoot out
+    }
+
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
